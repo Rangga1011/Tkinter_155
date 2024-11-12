@@ -1,0 +1,73 @@
+import tkinter as tk  # Mengimpor modul tkinter untuk membuat antarmuka grafis
+
+# Fungsi yang akan dijalankan ketika tombol "Hasil Prediksi" ditekan
+def prediksi_prodi():
+    # Mengubah teks pada label hasil_label menjadi "Prodi Pilihan: Teknologi Informasi"
+    # Tidak peduli input apa yang dimasukkan, hasil prediksi selalu menunjukkan "Teknologi Informasi"
+    hasil_label.config(text="Prodi Pilihan: Teknologi Informasi")
+
+# Membuat jendela utama aplikasi Tkinter
+window = tk.Tk()
+# Mengatur judul jendela yang akan muncul di bagian atas
+window.title("Aplikasi Prediksi Prodi Pilihan")
+
+# Membuat label untuk judul aplikasi
+judul_label = tk.Label(
+    window,  # Menentukan bahwa label ini berada di dalam window utama
+    text="Aplikasi Prediksi Prodi Pilihan",  # Teks yang akan ditampilkan pada label judul
+    font=("Arial", 16, "bold")  # Mengatur font, ukuran font, dan gaya font menjadi tebal (bold)
+)
+# Menempatkan label judul pada grid dengan posisi di baris ke-0 dan kolom ke-0
+# columnspan=2 membuat label mencakup 2 kolom sehingga berada di tengah
+# pady=10 menambahkan jarak vertikal (padding) di atas dan bawah label judul
+judul_label.grid(row=0, column=0, columnspan=2, pady=10)
+
+# Membuat list kosong untuk menyimpan label dan input nilai mata pelajaran
+input_labels = []  # List untuk menyimpan label dari setiap mata pelajaran
+inputs = []  # List untuk menyimpan widget entry (input teks) dari setiap mata pelajaran
+
+# Loop untuk membuat 10 input nilai mata pelajaran
+for i in range(10):
+    # Membuat label untuk setiap mata pelajaran dengan nomor bertambah tiap iterasi
+    label = tk.Label(
+        window,  # Menentukan bahwa label ini berada di dalam window utama
+        text=f"Nilai Mata Pelajaran {i+1}:"  # Teks label yang akan berubah sesuai dengan nomor mata pelajaran
+    )
+    # Menempatkan label pada grid dengan posisi di baris ke-(i+1) dan kolom ke-0
+    # padx=10 memberikan jarak horizontal di kiri dan kanan label
+    # pady=5 memberikan jarak vertikal di atas dan bawah label
+    # sticky="e" membuat teks rata kanan dalam kolom
+    label.grid(row=i+1, column=0, padx=10, pady=5, sticky="e")
+    # Menambahkan label ke dalam list input_labels untuk referensi
+    input_labels.append(label)
+
+    # Membuat widget Entry untuk input nilai mata pelajaran
+    entry = tk.Entry(window)  # Entry ini berada di dalam window utama
+    # Menempatkan entry pada grid di posisi baris (i+1) dan kolom ke-1, di sebelah label
+    # padx=10 dan pady=5 untuk memberi jarak
+    entry.grid(row=i+1, column=1, padx=10, pady=5)
+    # Menambahkan entry ke dalam list inputs untuk referensi
+    inputs.append(entry)
+
+# Membuat tombol yang berfungsi untuk menampilkan hasil prediksi
+prediksi_button = tk.Button(
+    window,  # Menentukan bahwa tombol ini berada di dalam window utama
+    text="Hasil Prediksi",  # Teks yang akan ditampilkan pada tombol
+    command=prediksi_prodi  # Fungsi yang akan dijalankan ketika tombol ditekan
+)
+# Menempatkan tombol pada grid di baris ke-11, mencakup 2 kolom (columnspan=2) untuk membuatnya berada di tengah
+# pady=10 memberikan jarak vertikal di atas dan bawah tombol
+prediksi_button.grid(row=11, column=0, columnspan=2, pady=10)
+
+# Membuat label untuk menampilkan hasil prediksi
+hasil_label = tk.Label(
+    window,  # Menentukan bahwa label ini berada di dalam window utama
+    text="Prodi Pilihan: ",  # Teks awal yang akan ditampilkan pada label hasil prediksi
+    font=("Arial", 12)  # Mengatur font dan ukuran teks pada label hasil
+)
+# Menempatkan label hasil prediksi pada grid di baris ke-12 dan mencakup 2 kolom untuk berada di tengah
+# pady=10 memberikan jarak vertikal di atas dan bawah label hasil
+hasil_label.grid(row=12, column=0, columnspan=2, pady=10)
+
+# Memulai loop utama Tkinter untuk menjalankan aplikasi dan memungkinkan interaksi pengguna dengan GUI
+window.mainloop()
